@@ -1,34 +1,20 @@
 // import logo from './logo.svg';
-import './App.css';
+// import App from './App.css';
 import Header from './Header';
-import headerLogo from './images/header-logo.svg'; 
+import Main from './Main';
+import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
+// import headerLogo from './images/header-logo.svg'; 
 
 function App() {
   return (
     <body class="page">
     <div className="page__container">
       <Header />
-      <main className="content page__content">
-      <section className="profile content__profile">
-        <div className="profile__avatar-container">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" className="profile__avatar" />
-          <div className="profile__avatar-edit"></div>
-        </div>
-        <div className="profile__info">
-          <div className="profile__text">
-            <h1 className="profile__name"></h1>
-            <p className="profile__about"></p>
-          </div>
-          <button className="profile__button profile__button_edit" type="button" aria-label="Редактировать"></button>
-        </div>
-        <button className="profile__button profile__button_add" type="button" aria-label="Добавить"></button>
-      </section>
-      <section className="elements content__elements">
-      </section>
-    </main>
-    <footer className="footer page__footer">
-      <p className="footer__copyright">&copy; 2020 Mesto Russia</p>
-    </footer>
+      <Main />
+      <Footer />
+      <PopupWithForm />
+
     <article className="overlay page__overlay page__overlay_type_edit">
       <form className="popup popup_type_form popup_do_edit" name="form-edit" novalidate>
         <h2 className="popup__heading">Редактировать профиль</h2>

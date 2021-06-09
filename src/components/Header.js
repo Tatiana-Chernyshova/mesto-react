@@ -1,13 +1,12 @@
-// import './App.css';
-import Header from './images/header-logo.svg'; 
+import headerLogo from '../images/header-logo.svg'; 
 
 function Header() {
   return (
-      <header className="header page__header">
-        <a href="#" className="header__link" target="_blank" rel="noopener" >
-          <img src={headerLogo} alt="Логотип Mesto" className="header__logo" />
-        </a>
-      </header>
+    <header className="header page__header">
+      <a href="#" className="header__link" target="_blank" rel="noopener" >
+        <img src={headerLogo} alt="Логотип Mesto" className="header__logo" />
+      </a>
+    </header> 
   );
 }
 
