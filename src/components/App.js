@@ -13,9 +13,12 @@ function App() {
       <Header />
       <Main />
       <Footer />
-      <PopupWithForm />
+      {/* <PopupWithForm /> */}
+      <PopupWithForm title="Новое место" name="add" />
+      {/* <PopupWithForm title="Вы уверены?" name="delete" />
+      <PopupWithForm title="Обновить аватар" name="avatar" />  */}
 
-    <article className="overlay page__overlay page__overlay_type_edit">
+    {/* <article className="overlay page__overlay page__overlay_type_edit">
       <form className="popup popup_type_form popup_do_edit" name="form-edit" novalidate>
         <h2 className="popup__heading">Редактировать профиль</h2>
         <fieldset className="popup__input-container">
@@ -87,7 +90,7 @@ function App() {
         </div>
         <button className="elements__button-delete elements__button-delete_hidden" type="button" aria-label="Удалить"></button>
       </div>
-    </template> 
+    </template>  */}
     </div>
     </body>
   );
