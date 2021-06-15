@@ -38,7 +38,7 @@ function PopupWithForm(props) {
     // const className = `switch ${this.props.color} ${this.state.isActive ? 'on' : 'off'}`;
 
     return (
-      <article className="overlay page__overlay">
+      <article className={`overlay page__overlay page__overlay_${props.isOpen}`}>
       <form 
       // className="popup popup_type_form popup_do_edit" 
       className={`popup popup_type_form popup_do_${props.name}`}  
@@ -49,7 +49,9 @@ function PopupWithForm(props) {
         {/* {props.children} */}
           <button type="submit" className="popup__submit" aria-label="Сохранить">Сохранить</button>
         </fieldset>
-        <button className="popup__button popup__button_close" type="button" aria-label="Закрыть"></button>
+        <button className="popup__button popup__button_close" type="button" aria-label="Закрыть"
+        onClick={props.onClose}
+        ></button>
       </form>
     </article>
     );

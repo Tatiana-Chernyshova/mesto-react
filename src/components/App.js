@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 // import App from './App.css';
+import React, { useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,16 +8,104 @@ import PopupWithForm from './PopupWithForm';
 // import headerLogo from './images/header-logo.svg'; 
 
 function App() {
+
+  
+    // Хук, управляющий внутренним состоянием.
+    // const [rating, setRating] = React.useState(0);
+    // const [isBlocked, setIsBlocked] = React.useState(false); // true или false
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false); // true или false
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false); // true или false
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false); // true или false
+
+    //     function handleDislike() {
+    //       setIsBlocked(true);
+    //   console.log(isBlocked)
+    //       const popup = document.querySelector('.page__overlay_type_add');
+    // popup.classList.add('page__overlay_active');
+    // console.log(popup)
+    // }
+
+    function handleIsEditProfilePopupOpen() {
+      setIsEditProfilePopupOpen(true);
+      console.log(isEditProfilePopupOpen)
+      const popup = document.querySelector('.page__overlay_type_edit');
+}
+function handleIsAddPlacePopupOpen() {
+  setIsAddPlacePopupOpen(true);
+  console.log(isAddPlacePopupOpen)
+  const popup = document.querySelector('.page__overlay_type_add');
+}
+function handleIsEditAvatarPopupOpen() {
+  setIsEditAvatarPopupOpen(true);
+  console.log(isEditAvatarPopupOpen)
+  const popup = document.querySelector('.page__overlay_type_avatar');
+}
+
+  function closeAllPopups() {
+    const popup = document.querySelector('.page__overlay_active');
+    popup.classList.remove('page__overlay_active');
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+  }
+   
+  // function handleEditAvatarClick() {
+  //   const popup = document.querySelector('.page__overlay_type_avatar');
+  //   // po.classList.add('page__overlay_active');
+  //   console.log(popup);
+  // }
+
+  // function handleEditProfileClick() {
+  //   const popup = document.querySelector('.page__overlay_type_edit');
+  //   popup.classList.add('page__overlay_active');
+  // }
+  
+  // function handleAddPlaceClick() {
+  //   const popup = document.querySelector('.page__overlay_type_add');
+  //   popup.classList.add('page__overlay_active');
+  // }
+
   return (
     <body class="page">
     <div className="page__container">
       <Header />
-      <Main />
+      <Main 
+      // op={oppen} 
+      // olo={console.log('025&&')} 
+        // onAddPlace={handleEditProfileClick}
+        // onEditAvatar={handleEditAvatarClick}
+      //   onEditProfile={handleAddPlaceClick}
+      // handleLike={handleDislike}
+      onAddPlace={handleIsAddPlacePopupOpen}
+      onEditAvatar={handleIsEditAvatarPopupOpen}
+      onEditProfile={handleIsEditProfilePopupOpen}
+      // handleIsAddPlacePopupOpen
+      />
       <Footer />
       {/* <PopupWithForm /> */}
-      <PopupWithForm title="Новое место" name="add" />
+      <PopupWithForm title="Редактировать профиль" name="edit" 
+      // isOpen="active" 
+      isOpen={isEditProfilePopupOpen && `active`}
+      onClose={closeAllPopups}
+      // children={
+      //   <input type="url" className="popup__input popup__input_el_image popup__input_el_image-avatar" id="avatar-input" name="link"
+      //   placeholder="Ссылка на картинку" value="" required />
+      //   <span className="avatar-input-error popup__input-error"></span>
+      // }
+      />
+      <PopupWithForm title="Новое место" name="add" 
+      // isOpen="active" 
+      isOpen={isAddPlacePopupOpen && `active`}
+      onClose={closeAllPopups}
+      />
+      <PopupWithForm title="Обновить аватар" name="avatar" 
+      // isOpen="active" 
+      isOpen={isEditAvatarPopupOpen && `active`}
+      onClose={closeAllPopups}
+      />
+      {/* {isAddPlacePopupOpen ? console.log('popopo') : console.log('p45445o')} */}
       {/* <PopupWithForm title="Вы уверены?" name="delete" />
-      <PopupWithForm title="Обновить аватар" name="avatar" />  */}
+      // <PopupWithForm title="Обновить аватар" name="avatar" />  */}
 
     {/* <article className="overlay page__overlay page__overlay_type_edit">
       <form className="popup popup_type_form popup_do_edit" name="form-edit" novalidate>
