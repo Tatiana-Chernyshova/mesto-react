@@ -1,14 +1,14 @@
 function Card(props) {
-  // console.log(props.card);
+
   function handleClick() {
     props.onCardClick(props.card);
-    // console.log(props.card.link)
   }
 
   return (
     <div className="elements__item">
       <img
         className="elements__image"
+        // alt={props.card.name} 
         style={{ backgroundImage: `url(${props.card.link})` }}
         onClick={handleClick}
       />
