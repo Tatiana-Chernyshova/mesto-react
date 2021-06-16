@@ -15,4 +15,13 @@ const selectors = {
   inputErrorClassActive: 'popup__input-error_active',
 };
 
-export { buttonEdit, buttonAdd, contentElements, selectors, nameInput, aboutInput, avatarInput, buttonEditAvatar };
+export { 
+  buttonEdit, 
+  buttonAdd, 
+  contentElements, 
+  selectors, 
+  nameInput, 
+  aboutInput, 
+  avatarInput, 
+  buttonEditAvatar 
+};

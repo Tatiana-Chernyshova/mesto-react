@@ -2,4 +2,8 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }

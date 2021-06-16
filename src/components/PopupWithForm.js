@@ -1,40 +1,23 @@
-import Popup from './Popup.js';
+function PopupWithForm(props) {
 
-export default class PopupWithForm extends Popup{
-  constructor(popupSelector, submitHandler) {
-    super(popupSelector);
-    this._submitHandler = submitHandler;
-    this._popupSubmitButton = this._popup.querySelector('.popup__submit');
-    this._defaultSubmitButtonText = this._popupSubmitButton.textContent;
-    this._form = this._popup.querySelector('.popup_type_form');
-    this._inputList = this._form.querySelectorAll('.popup__input');
-  }
+  return (
+    <article className={`overlay page__overlay page__overlay_${props.isOpen}`}>
+      <form
+        className={`popup popup_type_form popup_do_${props.name}`}
+        name={`form-${props.name}`}
+        noValidate>
+        <h2 className="popup__heading">{props.title}</h2>
+        <fieldset className="popup__input-container">
+          {props.children}
+          <button type="submit" className="popup__submit" aria-label="Сохранить">Сохранить</button>
+        </fieldset>
+        <button className="popup__button popup__button_close" type="button" aria-label="Закрыть"
+          onClick={props.onClose}
+        ></button>
+      </form>
+    </article>
+  );
 
-  close() {
-    super.close();
-    this._form.reset();
-  }
-
-  setEventListeners() {
-    super.setEventListeners();
-    this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._submitHandler(this._getInputValues());
-    });
-  }
-
-  _getInputValues() {
-    const values = {};
-    const inputs = [...this._inputList];
-    inputs.forEach(input => values[input.name] = input.value);
-    return values;
-  }
-
-  renderLoading(isLoading, message = 'Сохранение...') {
-    if (isLoading) {
-      this._popupSubmitButton.textContent = message;
-    } else {
-      this._popupSubmitButton.textContent = this._defaultSubmitButtonText;
-    }
-  }
 }
+
+export default PopupWithForm;

@@ -1,4 +1,4 @@
-export default class Api {
+class Api {
   constructor({ address, token }) {
     // тело конструктора
     this._address = address;
@@ -119,3 +119,8 @@ export default class Api {
   }
 
 }
+
+export default new Api({
+  address: 'https://mesto.nomoreparties.co/v1/cohort-24',
+  token: '36ca9ef1-bd1d-492c-84aa-4de20805470a'
+})
