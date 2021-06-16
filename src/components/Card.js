@@ -8,8 +8,8 @@ function Card(props) {
     <div className="elements__item">
       <img
         className="elements__image"
-        // alt={props.card.name} 
-        style={{ backgroundImage: `url(${props.card.link})` }}
+        src={props.card.link} 
+        alt={props.card.name} 
         onClick={handleClick}
       />
       <div className="elements__box">
