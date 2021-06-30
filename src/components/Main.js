@@ -1,24 +1,52 @@
 import api from "../utils/API";
 import React from 'react';
 import Card from "./Card";
+// import { useContext } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 
 function Main(props) {
 
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
+  // const [userName, setUserName] = React.useState('');
+  // const [userDescription, setUserDescription] = React.useState('');
+  // const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
+  const currentUser = React.useContext(CurrentUserContext);
 
-  React.useEffect(() => {
-    api.getUserData()
-      .then(res => {
-        setUserAvatar(res.avatar)
-        setUserName(res.name)
-        setUserDescription(res.about)
-      })
-      .catch(e => { console.log(e) })
-  }, [])
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then(newCard => {setCards(state => state.map(c => c._id === card._id ? newCard : c));
+    });
+  }
+
+
+  
+  function handleCardDelete(card) {
+    // // Снова проверяем, есть ли уже лайк на этой карточке
+    // const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.deleteCard(card._id)
+      .then(() => {
+          const newCards = cards.filter(e => e._id !== card._id);
+          setCards(newCards);
+    });
+    console.log("delete")
+  }
+
+  // React.useEffect(() => {
+  //   api.getUserData()
+  //     .then(res => {
+  //       console.log(currentUser);
+  //       console.log(res);
+  //       // setUserAvatar(res.avatar)
+  //       // setUserName(res.name)
+  //       // setUserDescription(res.about)
+  //     })
+  //     .catch(e => { console.log(e) })
+  // }, [])
 
   React.useEffect(() => {
     api.getCards()
@@ -34,7 +62,7 @@ function Main(props) {
         <div className="profile__avatar-container">
           <img
             alt="" className="profile__avatar"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           />
           <button
             className="profile__button profile__avatar-edit"
@@ -43,8 +71,8 @@ function Main(props) {
         </div>
         <div className="profile__info">
           <div className="profile__text">
-            <h1 className="profile__name">{userName}</h1>
-            <p className="profile__about">{userDescription}</p>
+            <h1 className="profile__name">{currentUser.name}</h1>
+            <p className="profile__about">{currentUser.about}</p>
           </div>
           <button
             className="profile__button profile__button_edit"
@@ -65,6 +93,8 @@ function Main(props) {
           <Card 
           card={obj} 
           onCardClick={props.onCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
           key={obj._id}
           />
         ) )}
