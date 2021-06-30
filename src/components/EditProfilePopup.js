@@ -34,58 +34,60 @@ function EditProfilePopup(props) {
   }, [currentUser]); 
 
   return (
-//     <PopupWithForm
-//     title="Редактировать профиль"
-//     name="edit"
-//     isOpen={props.isOpen}
-//     onClose={props.onClose}
-//     onSubmit={handleSubmit}
-//   >
-//     <input
-//       type="text"
-//       className="popup__input popup__input_el_name"
-//       id="name-input"
-//       name="name"
-//       placeholder="Ваше имя"
-//       defaultValue=""
-//       minLength="2"
-//       maxLength="40"
-//       required
-//       onChange={handleChangeName}
-//     />
-//     <span className="name-input-error popup__input-error"></span>
-//     <input
-//       type="text"
-//       className="popup__input popup__input_el_about"
-//       id="about-input"
-//       name="about"
-//       placeholder="Краткое описание"
-//       defaultValue=""
-//       minLength="2"
-//       maxLength="200"
-//       required
-//       onChange={handleChangeDescription}
-//     />
-//     <span className="about-input-error popup__input-error"></span>
-//   </PopupWithForm>
+    <PopupWithForm
+    title="Редактировать профиль"
+    name="edit"
+    isOpen={props.isOpen}
+    onClose={props.onClose}
+    onSubmit={handleSubmit}
+  >
+    <input
+      type="text"
+      className="popup__input popup__input_el_name"
+      id="name-input"
+      name="name"
+      placeholder="Ваше имя"
+      defaultValue=""
+      minLength="2"
+      maxLength="40"
+      required
+      onChange={handleChangeName}
+    />
+    <span className="name-input-error popup__input-error"></span>
+    <input
+      type="text"
+      className="popup__input popup__input_el_about"
+      id="about-input"
+      name="about"
+      placeholder="Краткое описание"
+      defaultValue=""
+      minLength="2"
+      maxLength="200"
+      required
+      onChange={handleChangeDescription}
+    />
+    <span className="about-input-error popup__input-error"></span>
+  </PopupWithForm>
 
-     <PopupWithForm
-            title="Обновить аватар"
-            name="avatar"
-            isOpen={isEditAvatarPopupOpen && `active`}
-            onClose={closeAllPopups}
-          >
-            <input
-              type="url"
-              className="popup__input popup__input_el_image popup__input_el_image-avatar"
-              id="avatar-input"
-              name="link"
-              placeholder="Ссылка на картинку"
-              defaultValue=""
-              required
-            />
-            <span className="avatar-input-error popup__input-error"></span>
-          </PopupWithForm>
+    //  <PopupWithForm
+    //         title="Обновить аватар"
+    //         name="avatar"
+    //         // isOpen={isEditAvatarPopupOpen && `active`}
+    //         // onClose={closeAllPopups}
+    //         isOpen={props.isOpen}
+    //   onClose={props.onClose}
+    //       >
+    //         <input
+    //           type="url"
+    //           className="popup__input popup__input_el_image popup__input_el_image-avatar"
+    //           id="avatar-input"
+    //           name="link"
+    //           placeholder="Ссылка на картинку"
+    //           defaultValue=""
+    //           required
+    //         />
+    //         <span className="avatar-input-error popup__input-error"></span>
+    //       </PopupWithForm>
   );
 }
 

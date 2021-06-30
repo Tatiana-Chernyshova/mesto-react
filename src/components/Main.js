@@ -10,31 +10,27 @@ function Main(props) {
   // const [userName, setUserName] = React.useState('');
   // const [userDescription, setUserDescription] = React.useState('');
   // const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([]);
+  
   const currentUser = React.useContext(CurrentUserContext);
 
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked)
-      .then(newCard => {setCards(state => state.map(c => c._id === card._id ? newCard : c));
-    });
-  }
+  // function handleCardLike(card) {
+  //   // Снова проверяем, есть ли уже лайк на этой карточке
+  //   const isLiked = card.likes.some(i => i._id === currentUser._id);
+  //   // Отправляем запрос в API и получаем обновлённые данные карточки
+  //   api.changeLikeCardStatus(card._id, !isLiked)
+  //     .then(newCard => {setCards(state => state.map(c => c._id === card._id ? newCard : c));
+  //   });
+  // }
 
 
   
-  function handleCardDelete(card) {
-    // // Снова проверяем, есть ли уже лайк на этой карточке
-    // const isLiked = card.likes.some(i => i._id === currentUser._id);
-    // // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.deleteCard(card._id)
-      .then(() => {
-          const newCards = cards.filter(e => e._id !== card._id);
-          setCards(newCards);
-    });
-    console.log("delete")
-  }
+  // function handleCardDelete(card) {
+  //   api.deleteCard(card._id)
+  //     .then(() => {
+  //         const newCards = cards.filter(e => e._id !== card._id);
+  //         setCards(newCards);
+  //   });
+  // }
 
   // React.useEffect(() => {
   //   api.getUserData()
@@ -48,13 +44,13 @@ function Main(props) {
   //     .catch(e => { console.log(e) })
   // }, [])
 
-  React.useEffect(() => {
-    api.getCards()
-      .then(card => {
-        setCards(card)
-      })
-      .catch(e => { console.log(e) })
-  }, [])
+  // React.useEffect(() => {
+  //   api.getCards()
+  //     .then(card => {
+  //       setCards(card)
+  //     })
+  //     .catch(e => { console.log(e) })
+  // }, [])
 
   return (
     <main className="content page__content">
@@ -89,12 +85,12 @@ function Main(props) {
         ></button>
       </section>
       <section className="elements content__elements">
-        {cards.map((obj) => (
+        {props.cards.map((obj) => (
           <Card 
           card={obj} 
           onCardClick={props.onCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onCardLike={props.onCardLike}
+          onCardDelete={props.onCardDelete}
           key={obj._id}
           />
         ) )}

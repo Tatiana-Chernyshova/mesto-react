@@ -16,6 +16,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   function handleIsEditProfilePopupOpen() {
     setIsEditProfilePopupOpen(true);
@@ -38,7 +39,17 @@ function App() {
     api.setUserData(el)
       .then(res => {
         setCurrentUser(res);
-        console.log(currentUser);
+      })
+      .catch(e => { console.log(e) })  
+      .finally(() =>{
+        closeAllPopups();
+      }) 
+  }
+
+  function handleUpdateAvatar(el) {
+    api.editUserAvatar(el)
+      .then(res => {
+        setCurrentUser(res);
       })
       .catch(e => { console.log(e) })  
       .finally(() =>{
@@ -53,6 +64,37 @@ function App() {
     setImagePopupOpen(false);
   }
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then(newCard => {setCards(state => state.map(c => c._id === card._id ? newCard : c));
+    });
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        const newCards = cards.filter(c => c._id !== card._id);
+        setCards(newCards);
+        // closeAllPopups()
+    });
+    console.log(card._id)
+    // console.log(card)
+  }
+
+
+//   function handleCardDelete(card) {
+//     api.deleteCard(card)
+//         .then(() => {
+//             const newCards = cards.filter((c) => c._id !== card._id);
+//             setCards(newCards);
+//             closeAllPopups()
+//         })
+//         .catch((err) => console.log(`Ошибка удаления карточки ${err}`));
+// }
+
   React.useEffect(() => {
     api.getUserData()
       .then(res => {
@@ -61,6 +103,13 @@ function App() {
       .catch(e => { console.log(e) })
   }, [])
 
+  React.useEffect(() => {
+    api.getCards()
+      .then(card => {
+        setCards(card)
+      })
+      .catch(e => { console.log(e) })
+  }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -73,6 +122,9 @@ function App() {
             onEditAvatar={handleIsEditAvatarPopupOpen}
             onEditProfile={handleIsEditProfilePopupOpen}
             onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
 
           <Footer />
@@ -84,9 +136,9 @@ function App() {
           />
 
           <EditAvatarPopup 
-          isOpen={isEditProfilePopupOpen && `active`} 
+          isOpen={isEditAvatarPopupOpen && `active`} 
           onClose={closeAllPopups}
-          // onUpdateUser={handleUpdateUser}
+          onUpdateUser={handleUpdateAvatar}
           />
 
           {/* <PopupWithForm
@@ -153,7 +205,7 @@ function App() {
             <span className="image-input-error popup__input-error"></span>
           </PopupWithForm>
 
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+          {/* <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} /> */}
 
           {/* <PopupWithForm
             title="Обновить аватар"
