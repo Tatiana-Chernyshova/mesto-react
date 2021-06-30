@@ -39,33 +39,27 @@ function App() {
     api.setUserData(el)
       .then(res => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch(e => { console.log(e) })  
-      .finally(() =>{
-        closeAllPopups();
-      }) 
   }
 
   function handleUpdateAvatar(el) {
     api.editUserAvatar(el)
       .then(res => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch(e => { console.log(e) })  
-      .finally(() =>{
-        closeAllPopups();
-      }) 
   }
 
   function handleAddPlaceSubmit(el) {
     api.addCard(el)
       .then(res => {
         setCards([res, ...cards]);
+        closeAllPopups();
       })
       .catch(e => { console.log(e) })  
-      .finally(() =>{
-        closeAllPopups();
-      }) 
   }
 
   function closeAllPopups() {
@@ -81,7 +75,8 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked)
       .then(newCard => {setCards(state => state.map(c => c._id === card._id ? newCard : c));
-    });
+    })
+      .catch(e => { console.log(e) });
   }
 
   function handleCardDelete(card) {
@@ -89,7 +84,8 @@ function App() {
       .then(() => {
         const newCards = cards.filter(c => c._id !== card._id);
         setCards(newCards);
-    });
+    })
+      .catch(e => { console.log(e) });
   }
 
   React.useEffect(() => {
@@ -127,25 +123,25 @@ function App() {
           <Footer />
 
           <EditProfilePopup 
-          isOpen={isEditProfilePopupOpen && `active`} 
+          isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
           />
 
           <EditAvatarPopup 
-          isOpen={isEditAvatarPopupOpen && `active`} 
+          isOpen={isEditAvatarPopupOpen} 
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateAvatar}
           />
 
           <AddPlacePopup 
-          isOpen={isAddPlacePopupOpen && `active`} 
+          isOpen={isAddPlacePopupOpen} 
           onClose={closeAllPopups}
           onUpdateUser={handleAddPlaceSubmit}
           />
 
           <ImagePopup
-            isOpen={isImagePopupOpen && `active`}
+            isOpen={isImagePopupOpen}
             onClose={closeAllPopups}
             card={selectedCard}
           />

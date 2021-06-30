@@ -21,12 +21,15 @@ function AddPlacePopup(props) {
       name,
       link,
     });
+    setName('');
+    setLink('');
   }
 
   return (
     <PopupWithForm
       title="Новое место"
       name="add"
+      buttonText="Создать"
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
@@ -37,7 +40,7 @@ function AddPlacePopup(props) {
         id="caption-input"
         name="name"
         placeholder="Название"
-        defaultValue=""
+        value={name || ''}
         minLength="2"
         maxLength="30"
         required
@@ -52,7 +55,7 @@ function AddPlacePopup(props) {
         id="image-input"
         name="link"
         placeholder="Ссылка на картинку"
-        defaultValue=""
+        value={link || ''}
         required
         onChange={handleChangeLink}
       />

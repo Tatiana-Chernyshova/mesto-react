@@ -2,7 +2,7 @@ function ImagePopup(props) {
 
     return (
       <article 
-      className={`overlay page__overlay page__overlay_type_look page__overlay_${props.isOpen}`}>
+      className={`overlay page__overlay page__overlay_type_look page__overlay_${props.isOpen && 'active'}`}>
       <div className="popup popup_type_image popup_do_look">
         <figure className="popup__figure">
           <img 
