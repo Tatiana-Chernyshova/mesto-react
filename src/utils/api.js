@@ -150,7 +150,9 @@ class Api {
 
 }
 
-export const api = new Api({
+const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-24',
   token: '36ca9ef1-bd1d-492c-84aa-4de20805470a'
 })
+
+export default api
