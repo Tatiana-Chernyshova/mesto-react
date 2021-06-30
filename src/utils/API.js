@@ -155,4 +155,4 @@ const api = new Api({
   token: '36ca9ef1-bd1d-492c-84aa-4de20805470a'
 })
 
-export default api;
+export default api
