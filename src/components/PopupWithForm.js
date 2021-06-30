@@ -9,7 +9,9 @@ function PopupWithForm(props) {
         <h2 className="popup__heading">{props.title}</h2>
         <fieldset className="popup__input-container">
           {props.children}
-          <button type="submit" className="popup__submit" aria-label="Сохранить">Сохранить</button>
+          <button type="submit" className="popup__submit" aria-label="Сохранить" 
+          onClick={props.onSubmit}
+          >Сохранить</button>
         </fieldset>
         <button className="popup__button popup__button_close" type="button" aria-label="Закрыть"
           onClick={props.onClose}
