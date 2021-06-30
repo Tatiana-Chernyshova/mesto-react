@@ -2,12 +2,12 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -57,6 +57,17 @@ function App() {
       }) 
   }
 
+  function handleAddPlaceSubmit(el) {
+    api.addCard(el)
+      .then(res => {
+        setCards([res, ...cards]);
+      })
+      .catch(e => { console.log(e) })  
+      .finally(() =>{
+        closeAllPopups();
+      }) 
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -79,7 +90,6 @@ function App() {
         const newCards = cards.filter(c => c._id !== card._id);
         setCards(newCards);
     });
-    console.log(card._id)
   }
 
   React.useEffect(() => {
@@ -128,37 +138,11 @@ function App() {
           onUpdateUser={handleUpdateAvatar}
           />
 
-          <PopupWithForm
-            title="Новое место"
-            name="add"
-            isOpen={isAddPlacePopupOpen && `active`}
-            onClose={closeAllPopups}
-          >
-            <input
-              type="text"
-              className="popup__input popup__input_el_caption"
-              id="caption-input"
-              name="name"
-              placeholder="Название"
-              defaultValue=""
-              minLength="2"
-              maxLength="30"
-              required
-            />
-            <span className="caption-input-error popup__input-error">
-              Вы пропустили это поле.
-            </span>
-            <input
-              type="url"
-              className="popup__input popup__input_el_image"
-              id="image-input"
-              name="link"
-              placeholder="Ссылка на картинку"
-              defaultValue=""
-              required
-            />
-            <span className="image-input-error popup__input-error"></span>
-          </PopupWithForm>
+          <AddPlacePopup 
+          isOpen={isAddPlacePopupOpen && `active`} 
+          onClose={closeAllPopups}
+          onUpdateUser={handleAddPlaceSubmit}
+          />
 
           <ImagePopup
             isOpen={isImagePopupOpen && `active`}
