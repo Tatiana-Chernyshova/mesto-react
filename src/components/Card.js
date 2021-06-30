@@ -22,14 +22,10 @@ function Card(props) {
   };
   const handleDeleteClick = () => {
     props.onCardDelete(props.card);
-    // console.log(props.card)
-    // console.log(props)
   };
   function handleClick() {
     props.onCardClick(props.card);
   }
-
-
 
   return (
     <div className="elements__item">

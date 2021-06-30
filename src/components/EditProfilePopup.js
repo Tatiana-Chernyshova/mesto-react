@@ -26,8 +26,6 @@ function EditProfilePopup(props) {
     });
   }
 
-// После загрузки текущего пользователя из API
-// его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -68,26 +66,6 @@ function EditProfilePopup(props) {
     />
     <span className="about-input-error popup__input-error"></span>
   </PopupWithForm>
-
-    //  <PopupWithForm
-    //         title="Обновить аватар"
-    //         name="avatar"
-    //         // isOpen={isEditAvatarPopupOpen && `active`}
-    //         // onClose={closeAllPopups}
-    //         isOpen={props.isOpen}
-    //   onClose={props.onClose}
-    //       >
-    //         <input
-    //           type="url"
-    //           className="popup__input popup__input_el_image popup__input_el_image-avatar"
-    //           id="avatar-input"
-    //           name="link"
-    //           placeholder="Ссылка на картинку"
-    //           defaultValue=""
-    //           required
-    //         />
-    //         <span className="avatar-input-error popup__input-error"></span>
-    //       </PopupWithForm>
   );
 }
 

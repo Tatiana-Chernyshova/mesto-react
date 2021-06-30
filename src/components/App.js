@@ -78,22 +78,9 @@ function App() {
       .then(() => {
         const newCards = cards.filter(c => c._id !== card._id);
         setCards(newCards);
-        // closeAllPopups()
     });
     console.log(card._id)
-    // console.log(card)
   }
-
-
-//   function handleCardDelete(card) {
-//     api.deleteCard(card)
-//         .then(() => {
-//             const newCards = cards.filter((c) => c._id !== card._id);
-//             setCards(newCards);
-//             closeAllPopups()
-//         })
-//         .catch((err) => console.log(`Ошибка удаления карточки ${err}`));
-// }
 
   React.useEffect(() => {
     api.getUserData()
@@ -141,38 +128,6 @@ function App() {
           onUpdateUser={handleUpdateAvatar}
           />
 
-          {/* <PopupWithForm
-            title="Редактировать профиль"
-            name="edit"
-            isOpen={isEditProfilePopupOpen && `active`}
-            onClose={closeAllPopups}
-          >
-            <input
-              type="text"
-              className="popup__input popup__input_el_name"
-              id="name-input"
-              name="name"
-              placeholder="Ваше имя"
-              defaultValue=""
-              minLength="2"
-              maxLength="40"
-              required
-            />
-            <span className="name-input-error popup__input-error"></span>
-            <input
-              type="text"
-              className="popup__input popup__input_el_about"
-              id="about-input"
-              name="about"
-              placeholder="Краткое описание"
-              defaultValue=""
-              minLength="2"
-              maxLength="200"
-              required
-            />
-            <span className="about-input-error popup__input-error"></span>
-          </PopupWithForm> */}
-
           <PopupWithForm
             title="Новое место"
             name="add"
@@ -204,26 +159,6 @@ function App() {
             />
             <span className="image-input-error popup__input-error"></span>
           </PopupWithForm>
-
-          {/* <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} /> */}
-
-          {/* <PopupWithForm
-            title="Обновить аватар"
-            name="avatar"
-            isOpen={isEditAvatarPopupOpen && `active`}
-            onClose={closeAllPopups}
-          >
-            <input
-              type="url"
-              className="popup__input popup__input_el_image popup__input_el_image-avatar"
-              id="avatar-input"
-              name="link"
-              placeholder="Ссылка на картинку"
-              defaultValue=""
-              required
-            />
-            <span className="avatar-input-error popup__input-error"></span>
-          </PopupWithForm> */}
 
           <ImagePopup
             isOpen={isImagePopupOpen && `active`}
